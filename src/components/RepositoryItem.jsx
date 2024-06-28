@@ -6,8 +6,8 @@ import theme from "../theme";
 
 const RepositoryItemHeader = (props) => {
     return (
-        <View style={{ flexDirection: 'row', paddingBottom: 2 }}>
-            <View style={{ paddingEnd: 10, justifyContent: 'center' }}>
+        <View style={{ flexDirection: 'row', paddingBottom: 2}}>
+            <View style={{ paddingEnd: 10, marginTop: 18 }}>
                 <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
             </View>
             { /* Flex 1 hace que ocupe todo el ancho y haga salto de linea si lo necesita */}
