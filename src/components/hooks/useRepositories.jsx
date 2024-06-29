@@ -1,24 +1,28 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_REPOSITORIES } from "../../graphql/queries";
 
 const useRepositories = () => {
-    const [repositories, setRepositories] = useState(null)
+    const { data = {}, loading, refetch } = useQuery(GET_REPOSITORIES)
+    const { repositories = null } = data
 
-    const fetchRepositories = async () => {
-        const response = await globalThis.fetch('http://localhost:5000/api/repositories') // 'global' porque es un metodo de un objeto global 😳
-        const json = await response.json()
-        setRepositories(json)
-    }
+    // const [repositories, setRepositories] = useState(null)
 
-    useEffect(() => {
-        fetchRepositories() // se llama la primera vez cuando se monta el componente
-    }, [])
+    // const fetchRepositories = async () => {
+    //     const response = await globalThis.fetch('http://localhost:5000/api/repositories') // 'global' porque es un metodo de un objeto global 😳
+    //     const json = await response.json()
+    //     setRepositories(json)
+    // }
 
+    // useEffect(() => {
+    //     fetchRepositories() // se llama la primera vez cuando se monta el componente
+    // }, [])
 
     const repositoriesNode = repositories
-        ? repositories.edges.map(edge => edge.node)
-        : []
+    ? repositories.edges.map(edge => edge.node)
+    : []
 
-        return { repositories: repositoriesNode }
+    return { loading, repositories: repositoriesNode, refetch }
 }
 
 export default useRepositories
